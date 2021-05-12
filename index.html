@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>GBGW Battle Assesment Calculator</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <form class="form-ba" method="POST" action="/ba.php">
+        <h1 class="h3 mb-3 font-weight-normal">Battle Assesment Calculator</h1>
+        <div id="ba-card" class="card text-center bg-success text-white mb-4" style="display: none">
+            <div class="card-body h2">
+                Your BA : <span id="ba-detail"></span>
+            </div>
+        </div>
+        <label for="inputSecs" class="sr-only">Clear Time</label>
+        <input type="number" id="inputSecs" class="form-control mb-4" placeholder="Clear Time" name="time" required autofocus>
+        <label for="inputDmg" class="sr-only">Total Damage</label>
+        <input type="number" id="inputDmg" class="form-control mb-4" placeholder="Total Damage" name="damage" required>
+        <label for="inputArmr" class="sr-only">Total Armor</label>
+        <input type="number" id="inputArmr" class="form-control mb-4" placeholder="Total Damage" name="armor" required>
+        <div class="p-3 text-center">
+            <a href="index.html" class="btn btn-lg btn-warning">Reset</a>
+            <button class="btn btn-lg btn-primary" type="submit">Calculate</button>
+        </div>
+        <p class="mt-5 mb-3 text-muted">
+            &copy; 2021
+        </p>
+    </form>
+</body>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+    $(".form-ba").on("submit", function(event) {
+        event.preventDefault();
+        var formValues = $(".form-ba").serialize();
+
+        var a = ((58 - $("#inputSecs").val()) / 2) * 0.001;
+        var b = ($("#inputDmg").val() / $("#inputArmr").val());
+        var c = (b / 3) * 0.001;
+        var d = (1.259 - a) + c;
+
+        // var x = (d, 4);
+
+
+        $('#ba-detail').html(d);
+        $('#ba-card').show();
+        // $.ajax({
+        //     method: "POST",
+        //     url: '/ba.php',
+        //     data: formValues,
+        //     statusCode: {
+        //         500: function() {
+        //             alert("query error");
+        //         }
+        //     }
+        // }).done(function(data, textStatus, xhr) {
+        //     // console.log(xhr);
+        //     $('#ba-detail').html(data);
+        //     $('#ba-card').show();
+        // });
+
+        // $.post("/activity/query", formValues, function(data) {
+        //     // Display the returned data in browser
+        // });
+    });
+
+});
+</script>
+
+</html>
